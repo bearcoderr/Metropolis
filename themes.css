@@ -480,6 +480,24 @@ label{font-weight:400}label.error{color:#e02222!important;margin:0;padding:0;pos
 body .ui-panel-top-devices-inner {
 	z-index: 998;
 }
+.brand-list-inner__image-inner {
+    max-width: 150px;
+    height: 70px;
+  
+  }
+  .brand-list-inner__image-wrapper  {
+    background-color: #fff;
+    padding: 10px;
+  }
+  .type_1 .company-item__picture {
+    height: 512px;
+}
+@media (max-width: 991px) {
+    .type_1 .company-item__picture {
+        height: auto;
+        padding-top: 56%;
+    }
+}
 /* End */
 /* /bitrix/templates/aspro-priority2/css/fonts/onest/css/onest.min.css?17139350563916 */
 /* /bitrix/templates/aspro-priority2/css/bootstrap.min.css?171393505688745 */
