@@ -845,7 +845,53 @@
                 </div>
             </div>
         </div>
-
+        
+        <div class="index-block index-block--padding-top-80 index-block--padding-bottom-80">
+            <div class="maxwidth-theme index-block__headings">
+                <h3 class="switcher-title font_40" style="margin-bottom: 40px;">
+                    Прояви свои профессиональные и личностные компетенции на практике! Как это было в 2023 и 2024 г.
+                </h3> 
+                <div class="company-item front_company_mainpage_company_text_social-projects-template type_1 mt mt--48">
+                    <div class="video-block__slider swiper-slider relative">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="company-item__picture relative card-image rounded-n" style="background-image: url(https://metropoli8.tw1.ru/upload/resize_cache/iblock/11f/6uc4krjneu2hdhmirv9k4aj9lo6v50qf/2000_2000_0/2k_9.jpg)">
+                                    <div class="video-block">
+                                        <div class="video-block__play bg-theme-after">
+                                            <div class="video-block__fancy fancy" rel="nofollow">
+                                                <iframe class="company-item__video-iframe" data-src="https://rutube.ru/play/embed/fedfca9ea22da9424c004c754fe5c22a/?quality=1&autoStart=0&sTitle=false&sAuthor=false&platform=someplatform"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="company-item__picture relative card-image rounded-n" style="background-image: url(https://metropoli8.tw1.ru/upload/resize_cache/iblock/11f/6uc4krjneu2hdhmirv9k4aj9lo6v50qf/2000_2000_0/2k_9.jpg)">
+                                    <div class="video-block">
+                                        <div class="video-block__play bg-theme-after">
+                                            <div class="video-block__fancy fancy" rel="nofollow">
+                                                <iframe class="company-item__video-iframe" data-src="https://rutube.ru/play/embed/fedfca9ea22da9424c004c754fe5c22a/?quality=1&autoStart=0&sTitle=false&sAuthor=false&platform=someplatform"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="swiper-pagination"></div>
+                    </div> 
+                    <div class="video-block__slider-thumb swiper-slider mt mt--24">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <h3 class="title-text fw-500 switcher-title relative text-center pt pt--24">Заголовок Видео 1</h3>
+                            </div>
+                            <div class="swiper-slide">
+                                <h3 class="title-text fw-500 switcher-title relative text-center pt pt--24">Заголовок Видео 2</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer id="footer" class="footer footer-1 theme-dark">
@@ -1131,33 +1177,37 @@
             </div>
         </div>
     </footer>
- <script>
+<script>
+document.querySelectorAll('.video-block__slider').forEach((videoSlider, index) => {
+    const thumbSlider = videoSlider.nextElementSibling; 
+
+    if (thumbSlider && thumbSlider.classList.contains('video-block__slider-thumb')) {
+        const videoSwiper = new Swiper(videoSlider, {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 16,
+            pagination: {
+                el: videoSlider.querySelector('.swiper-pagination'),
+                type: 'bullets',
+            },
+        });
+        const videoThumbSwiper = new Swiper(thumbSlider, {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 16,
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true,
+            },
+        });
+        videoSwiper.controller.control = videoThumbSwiper;
+        videoThumbSwiper.controller.control = videoSwiper;
+    } else {
+        console.warn(`Thumb slider not found for video slider at index ${index}`);
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
-    
-
-    
-    const videoSwiper = new Swiper('.video-block__slider', {
-        loop: true, 
-        slidesPerView: 1,
-        spaceBetween: 16, 
-        pagination: {
-            el: '.swiper-pagination',
-            type: 'bullets',
-        },  
-    });
-    const videoThumbSwiper = new Swiper('.video-block__slider-thumb', {
-        loop: true, 
-        slidesPerView: 1,
-        spaceBetween: 16, 
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        }, 
-    });
-    videoSwiper.controller.control = videoThumbSwiper;
-    videoThumbSwiper.controller.control = videoSwiper;
-
-     
 
     const companyPictureSwiper = new Swiper('.company-item__picture .swiper-slider', {
         loop: true, 
@@ -1168,7 +1218,6 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'bullets',
         }, 
     });
-
 
     const brandSwiper = new Swiper('.brand-list-inner__slider', {
         loop: true, 
@@ -1217,6 +1266,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
     const vacancySwiper = new Swiper('.vacancy-block__slider', {
         loop: true, 
         slidesPerView: 1,
@@ -1231,6 +1281,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } 
         }
     });
+
     $('.input-file input[type=file]').on('change', function(){
         let file = this.files[0];
         $(this).next().html(file.name);
